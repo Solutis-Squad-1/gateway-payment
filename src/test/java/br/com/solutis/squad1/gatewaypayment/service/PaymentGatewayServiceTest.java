@@ -35,7 +35,7 @@ class PaymentGatewayServiceTest {
         String paymentId = "123";
         double total = 100.0;
         LocalDate date = LocalDate.now().plusDays(2);
-        
+
         String expectedKey = "9999000091239" + date.getDayOfMonth() + date.getMonthValue() + date.getYear() + "100001";
 
         when(paymentGatewayService.generateValidBankBill(paymentId, total)).thenReturn(expectedKey);

@@ -25,6 +25,13 @@ public class PaymentGatewayService {
         return "9999"+ "00009" + paymentId + "9" + date.getDayOfMonth() + date.getMonthValue() + date.getYear() + (long) (total * 100) + "1";
     }
 
+    public boolean validateCreditCard(String cardNumber, String cvv, String expiryDate) {
+        if (validateCreditCardNumber(cardNumber) && validateCvv(cvv) && validatExpiryDate(expiryDate)) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean validateCreditCardNumber(String cardNumber) {
         int sum = 0;
         int parity = cardNumber.length() % 2;
@@ -45,12 +52,5 @@ public class PaymentGatewayService {
         YearMonth currentYearMonth = YearMonth.now();
         YearMonth cardYearMonth = YearMonth.parse(expiryDate, DateTimeFormatter.ofPattern("MM/yy"));
         return cardYearMonth.isAfter(currentYearMonth);
-    }
-
-    public boolean validateCreditCard(String cardNumber, String cvv, String expiryDate) {
-        if (validateCreditCardNumber(cardNumber) && validateCvv(cvv) && validatExpiryDate(expiryDate)) {
-            return true;
-        }
-        return false;
     }
 }
