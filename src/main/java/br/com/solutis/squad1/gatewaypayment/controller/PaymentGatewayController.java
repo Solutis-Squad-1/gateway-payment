@@ -1,5 +1,7 @@
 package br.com.solutis.squad1.gatewaypayment.controller;
 
+import br.com.solutis.squad1.gatewaypayment.dto.PaymentCreditCardDto;
+import br.com.solutis.squad1.gatewaypayment.dto.PaymentGenerationCodDto;
 import br.com.solutis.squad1.gatewaypayment.service.PaymentGatewayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,30 +12,29 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentGatewayController {
     private PaymentGatewayService paymentGatewayService;
 
-    @GetMapping("/pix/validation")
+    @PutMapping("/pix/validation")
     public void confirmPaymentPix() {
-        //envia requisição para o pagamento com a confirmação do pagamento (confirmed ou recused)
+        paymentGatewayService.confirmPaymentPix();
     }
 
-    @GetMapping("/BankBill/validation")
+    @PutMapping("/BankBill/validation")
     public void confirmPaymentBankBill() {
-        //envia requisição para o pagamento com a confirmação do pagamento
+        paymentGatewayService.confirmPaymentBankBill();
     }
 
-    @GetMapping("/CreditCard/validation")
-    public void confirmPaymentCreditCard() {
-        //Recebe dados do pagamento
-        //envia requisição para o pagamento com a confirmação do pagamento
+    @PutMapping("/CreditCard/validation")
+    public void confirmPaymentCreditCard(@RequestBody PaymentCreditCardDto dto) {
+        paymentGatewayService.confirmPaymentCreditCard(dto);
     }
 
     @GetMapping("/pix/key/generation")
-    public String generateValidPixKey(String paymentId, double total) {
-        return paymentGatewayService.generateValidPixKey(paymentId, total);
+    public String generateValidPixKey(@RequestBody PaymentGenerationCodDto dto) {
+        return paymentGatewayService.generateValidPixKey(dto);
     }
 
 
     @GetMapping("/BankBill/code/generation")
-    public String generateValidBankBill(String paymentId, double total) {
-        return paymentGatewayService.generateValidBankBill(paymentId, total);
+    public String generateValidBankBill(@RequestBody PaymentGenerationCodDto dto) {
+        return paymentGatewayService.generateValidBankBill(dto);
     }
 }
