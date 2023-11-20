@@ -1,4 +1,4 @@
-package br.com.solutis.squad1.orderservice.config;
+package br.com.solutis.squad1.gatewaypayment.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;

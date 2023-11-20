@@ -1,9 +1,13 @@
-package br.com.solutis.squad1.paymentservice.dto;
+package br.com.solutis.squad1.gatewaypayment.dto;
 
-import br.com.solutis.squad1.paymentservice.model.entity.enums.FormPayment;
 
+import br.com.solutis.squad1.gatewaypayment.enums.FormPayment;
+
+/**
+ * GatewayDto
+ */
 public record GatewayDto (
         Long paymentId,
-        FormPayment formPayment
+        String formPayment
 ) {
 }
